@@ -1,4 +1,4 @@
-from .credentials import OPENAI_API_KEY
+from ..credentials import OPENAI_API_KEY
 
 from src.vectorstore.main import vectorstore
 from langchain_openai import ChatOpenAI
