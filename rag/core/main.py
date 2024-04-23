@@ -1,6 +1,6 @@
-from ..credentials import OPENAI_API_KEY
+from rag.credentials import OPENAI_API_KEY
 
-from src.vectorstore.main import vectorstore
+from rag.vectorstore.main import vectorstore
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.chains.combine_documents import create_stuff_documents_chain

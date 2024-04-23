@@ -1,7 +1,7 @@
 import os
 
 from langchain_pinecone import PineconeVectorStore
-from src.credentials import PINECONE_API_KEY, OPENAI_API_KEY
+from rag.credentials import PINECONE_API_KEY, OPENAI_API_KEY
 from langchain_openai import OpenAIEmbeddings
 
 INDEX_NAME = 'ragv2'
