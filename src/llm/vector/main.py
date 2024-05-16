@@ -1,10 +1,10 @@
 import os
 
 from langchain_pinecone import PineconeVectorStore
-from rag.credentials import PINECONE_API_KEY, OPENAI_API_KEY
+from credentials import PINECONE_API_KEY, OPENAI_API_KEY
 from langchain_openai import OpenAIEmbeddings
 
-INDEX_NAME = 'ragv2'
+INDEX_NAME = 'ragv1'
 os.environ['PINECONE_API_KEY'] = PINECONE_API_KEY
 
 embedding = OpenAIEmbeddings(

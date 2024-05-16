@@ -1,12 +1,12 @@
-from rag.credentials import OPENAI_API_KEY
+from credentials import OPENAI_API_KEY
 
-from rag.vectorstore.main import vectorstore
+from .vector.main import vectorstore
 from langchain_openai import ChatOpenAI
-from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.prompts import ChatPromptTemplate, PromptTemplate
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains import create_retrieval_chain
 
-class Chat:
+class ChatBot:
 
     def __init__(self):
 
@@ -16,32 +16,36 @@ class Chat:
 
     def ask(self, question: str):
 
-        system_template = """
+        template = '''
         You are a helpful assistant that answers questions about World War 2.
         You will be given context for the questions, and answer the user based on the context and whatever knowledge you might already have. 
         If the user asks any questions outside the scope of World War 2 or the context, you will simply state that you do not know the answer.
+        
         Context: 
-        <context>
         {context}
-        </context>
-        """
 
-        user_template = """
-        Question: {input}
-        """
+        Question: 
+        {input}
 
-        prompt = ChatPromptTemplate.from_messages([
-            ('system', system_template),
-            ('user', user_template)
-        ])
+        Answer:
+        '''
+
+        prompt = PromptTemplate(
+            template=template,
+            input_variables=['context', 'input']
+        )
 
         document_chain = create_stuff_documents_chain(self.llm, prompt)
-
         retrieval_chain = create_retrieval_chain(self.retriever, document_chain)
+
+        response = retrieval_chain.invoke({'input': question})
+
+        self.question = question
+        self.answer = 
 
         return retrieval_chain.invoke({
             'input': question
-        })['answer']
+        })
 
          
 
